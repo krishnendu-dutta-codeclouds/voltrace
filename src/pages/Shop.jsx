@@ -165,11 +165,11 @@ export default function Shop() {
                     key={s}
                     active={filters.sizes.includes(s)}
                     onClick={() => toggleIn('sizes', s)}
-                    className="h-11 px-4 text-[13px] font-bold rounded-[10px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 group"
+                    className="relative h-11 px-4 pr-11 text-[13px] font-bold rounded-[10px] border-2 border-border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 group"
                   >
                     {s}
                     {filters.sizes.includes(s) && (
-                      <span className="ml-2 inline-flex items-center justify-center w-5 h-5 bg-accent text-ink rounded-full" aria-hidden="true">
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-5 h-5 bg-accent text-ink rounded-full pointer-events-none" aria-hidden="true">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -189,7 +189,7 @@ export default function Shop() {
                     key={w}
                     active={filters.widths.includes(w)}
                     onClick={() => toggleIn('widths', w)}
-                    className="h-11 px-4 text-[13px] font-bold rounded-[10px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 group"
+                    className="h-11 px-4 text-[13px] font-bold rounded-[10px] border-2 border-border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 group"
                   >
                     {w}
                     {filters.widths.includes(w) && (

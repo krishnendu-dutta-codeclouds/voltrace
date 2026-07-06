@@ -11,6 +11,7 @@ const BASE =
 
 const VARIANTS = {
   primary:   'bg-ink text-accent border-ink hover:bg-accent hover:text-ink hover:border-accent',
+  dark:      'bg-ink text-accent border-accent hover:bg-[#111] hover:text-accent hover:border-accent',
   accent:    'bg-accent text-ink border-accent hover:bg-ink hover:text-accent hover:border-ink',
   secondary: 'bg-transparent text-ink border-ink hover:bg-ink hover:text-accent hover:border-ink',
   ghost:     'bg-transparent text-ink border-transparent hover:opacity-70 px-0 min-h-[44px]',
@@ -53,6 +54,7 @@ const Button = forwardRef(function Button(
       ref={ref}
       type={type}
       className={classes}
+      style={variant === 'dark' ? { backgroundColor: '#0A0A0A', color: '#CFFF04', borderColor: '#CFFF04' } : undefined}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...rest}

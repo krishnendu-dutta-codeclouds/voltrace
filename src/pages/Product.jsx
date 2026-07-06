@@ -252,21 +252,20 @@ export default function Product() {
             />
 
             {/* Qty + CTA */}
-            <div id="pdp-cta" className="flex items-center gap-3">
-              {/* Qty */}
-              <div className="flex items-center border border-border rounded-full overflow-hidden" role="group" aria-label="Quantity">
+            <div id="pdp-cta" className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full border border-border bg-surface-pure p-1">
                 <button
                   type="button"
-                  className="w-11 h-11 flex items-center justify-center hover:bg-surface-alt transition-colors duration-150 text-lg font-bold"
+                  className="w-11 h-11 flex items-center justify-center rounded-full text-lg font-bold text-ink hover:bg-surface-alt transition-colors duration-150"
                   aria-label="Decrease quantity"
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
                 >
                   −
                 </button>
-                <span className="w-10 text-center text-[15px] font-bold" aria-live="polite">{qty}</span>
+                <span className="text-center text-[15px] font-semibold text-ink">{qty}</span>
                 <button
                   type="button"
-                  className="w-11 h-11 flex items-center justify-center hover:bg-surface-alt transition-colors duration-150 text-lg font-bold"
+                  className="w-11 h-11 flex items-center justify-center rounded-full text-lg font-bold text-ink hover:bg-surface-alt transition-colors duration-150"
                   aria-label="Increase quantity"
                   onClick={() => setQty((q) => q + 1)}
                 >
@@ -274,14 +273,18 @@ export default function Product() {
                 </button>
               </div>
 
-              {/* Add to bag */}
               <Magnetic>
-                <Button variant="primary" size="lg" onClick={onAdd} data-cursor="hover" fullWidth>
+                <Button
+                  variant="dark"
+                  size="lg"
+                  onClick={onAdd}
+                  data-cursor="hover"
+                  className="w-full sm:w-auto rounded-[18px] shadow-[0_24px_64px_-34px_rgba(207,255,4,0.95)]"
+                >
                   {added ? 'Added to bag ✓' : 'Add to bag'}
                 </Button>
               </Magnetic>
 
-              {/* Wishlist */}
               <button
                 type="button"
                 className={[
@@ -355,7 +358,12 @@ export default function Product() {
           <p className="text-[14px] font-bold text-ink leading-tight">{product.name}</p>
           <p className="text-[13px] font-black text-ink">${product.price}</p>
         </div>
-        <Button variant="primary" onClick={onAdd} data-cursor="hover">
+        <Button
+          variant="accent"
+          onClick={onAdd}
+          data-cursor="hover"
+          className="bg-[#CFFF04] text-ink border-[#CFFF04] hover:bg-[#D4FF3B] hover:text-ink shadow-accent"
+        >
           {added ? 'Added ✓' : 'Add to bag'}
         </Button>
       </div>

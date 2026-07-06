@@ -23,7 +23,7 @@ export default function VariantSelector({
           <span className="text-[13px] font-bold text-ink uppercase tracking-[0.04em]">Colorway</span>
           <span className="text-[12px] text-ink-muted">{colorway || 'Select'}</span>
         </div>
-        <div className="flex items-center gap-2 flex-wrap" role="radiogroup" aria-label="Colorway">
+        <div className="flex flex-wrap items-center gap-3" role="radiogroup" aria-label="Colorway">
           {product.colorways.map((c) => (
             <Swatch
               key={c.name}
@@ -31,7 +31,7 @@ export default function VariantSelector({
               label={c.name}
               selected={colorway === c.name}
               onClick={(e) => onColorway(c.name, e)}
-              size={40}
+              size={44}
             />
           ))}
         </div>
@@ -53,19 +53,25 @@ export default function VariantSelector({
         <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Size">
           {product.sizes.map((s) => {
             const selected = size === s.size;
+            const buttonStyle = selected
+              ? { backgroundColor: '#0A0A0A', color: '#FFFFFF', borderColor: '#CFFF04' }
+              : s.inStock
+              ? { backgroundColor: '#F2F2F2', color: '#0A0A0A', borderColor: '#E1E1E1' }
+              : { backgroundColor: 'rgba(242, 242, 242, 0.7)', color: '#9A9DA6', borderColor: '#E1E1E1' };
             return (
               <button
                 key={s.size}
                 type="button"
                 className={[
-                  'w-14 h-14 rounded-[12px] text-[15px] font-black border-2 transition-all duration-200 ease-out select-none relative overflow-hidden group',
+                  'min-w-[60px] h-14 px-5 rounded-[18px] text-[14px] font-bold border-2 transition-all duration-200 ease-out select-none relative overflow-hidden flex items-center justify-center',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1',
                   selected
-                    ? 'bg-ink text-accent border-ink shadow-lg shadow-ink/30 scale-105 ring-2 ring-accent ring-offset-2'
+                    ? 'border-accent ring-2 ring-accent/20 shadow-[0_14px_48px_-28px_rgba(207,255,4,0.9)]'
                     : s.inStock
-                    ? 'bg-surface-pure text-ink border-border hover:bg-ink hover:text-accent hover:border-ink hover:scale-105 hover:shadow-md hover:shadow-ink/20'
-                    : 'bg-surface-alt/50 text-ink-soft/40 border-border cursor-not-allowed opacity-50',
+                    ? 'hover:border-accent hover:bg-accent/10'
+                    : 'cursor-not-allowed opacity-60',
                 ].join(' ')}
+                style={buttonStyle}
                 onClick={(e) => onSize(s.size, e)}
                 disabled={!s.inStock}
                 role="radio"
@@ -73,17 +79,10 @@ export default function VariantSelector({
                 aria-disabled={!s.inStock || undefined}
                 title={!s.inStock ? `Size ${s.size} — out of stock` : `Size ${s.size}`}
               >
-                <span className="relative z-10 flex items-center justify-center w-full h-full">{s.size}</span>
+                <span className="relative z-10">{s.size}</span>
                 {!s.inStock && (
                   <span className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
                     <span className="w-[160%] h-[2px] bg-ink-soft/30 -rotate-45 transform" />
-                  </span>
-                )}
-                {selected && s.inStock && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center bg-accent text-ink rounded-full" aria-hidden="true">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
                   </span>
                 )}
               </button>
@@ -105,23 +104,39 @@ export default function VariantSelector({
             <span className="text-[12px] text-ink-muted">{width || 'Select'}</span>
           </div>
           <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Width">
-            {product.width.map((w) => (
-              <Chip
-                key={w}
-                active={width === w}
-                onClick={(e) => onWidth(w, e)}
-                className="h-12 px-5 text-[13px] font-bold rounded-[10px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 group"
-              >
-                {w}
-                {width === w && (
-                  <span className="ml-2 inline-flex items-center justify-center w-5 h-5 bg-accent text-ink rounded-full" aria-hidden="true">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  </span>
-                )}
-              </Chip>
-            ))}
+            {product.width.map((w) => {
+              const selected = width === w;
+              const widthStyle = selected
+                ? { backgroundColor: '#0A0A0A', color: '#FFFFFF', borderColor: '#CFFF04' }
+                : { backgroundColor: '#F2F2F2', color: '#0A0A0A', borderColor: '#E1E1E1' };
+              return (
+                <button
+                  key={w}
+                  type="button"
+                  className={[
+                    'relative h-12 px-6 rounded-[16px] text-[13px] font-bold border-2 transition-all duration-200 ease-out select-none flex items-center justify-center',
+                    selected
+                      ? 'shadow-[0_12px_40px_-24px_rgba(207,255,4,0.9)]'
+                      : 'hover:border-accent hover:bg-accent/10',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1',
+                  ].join(' ')}
+                  style={widthStyle}
+                  onClick={(e) => onWidth(w, e)}
+                  role="radio"
+                  aria-checked={selected}
+                  title={`Width ${w}`}
+                >
+                  <span className="relative z-10">{w}</span>
+                  {selected && (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-5 h-5 bg-accent text-ink rounded-full pointer-events-none" aria-hidden="true">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

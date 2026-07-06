@@ -109,7 +109,8 @@ export default function NavBar({ minimal = false }) {
               {/* Cart */}
               <Link
                 to="/cart"
-                className="relative flex items-center gap-2 h-11 px-4 rounded-full bg-ink text-accent text-[13px] font-bold tracking-[0.04em] hover:bg-accent hover:text-ink transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="relative flex items-center gap-2 h-11 px-4 rounded-full bg-ink text-accent text-[13px] font-bold tracking-[0.04em] hover:bg-accent hover:text-ink transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 isolate"
+                style={{ mixBlendMode: 'normal' }}
                 aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
                 data-cursor="hover"
               >
@@ -119,7 +120,7 @@ export default function NavBar({ minimal = false }) {
                   height="18"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"

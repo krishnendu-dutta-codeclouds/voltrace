@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
 import Landing from './pages/Landing';
@@ -54,7 +54,7 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <OrderProvider>
         <CartProvider>
           <WishlistProvider>
@@ -63,6 +63,6 @@ export default function App() {
           </WishlistProvider>
         </CartProvider>
       </OrderProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

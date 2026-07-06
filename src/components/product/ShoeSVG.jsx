@@ -9,9 +9,12 @@ export default function ShoeSVG({
   angle = 0,
   size = '100%',
 }) {
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const assetSrc = baseUrl.replace(/\/$/, '') + '/images/banana_shoe.png';
+
   return (
     <img
-      src="/images/banana_shoe.png"
+      src={assetSrc}
       alt="Voltrace Banana Edition"
       style={{
         width: size,

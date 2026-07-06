@@ -12,10 +12,10 @@ export default function Chip({
   ...rest
 }) {
   const base =
-    'inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[12px] font-semibold border transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1';
+    'inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[12px] font-semibold border-2 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1';
   const activeClass = active
     ? 'bg-accent text-ink border-accent'
-    : 'bg-surface-pure text-ink border-border hover:border-ink-muted';
+    : 'bg-surface-alt text-ink border-border hover:border-ink-muted';
 
   const classes = [base, activeClass, className].filter(Boolean).join(' ');
 

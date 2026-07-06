@@ -28,9 +28,12 @@ export default function ProductImage({
     );
   }
 
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const normalizedSrc = src.startsWith('/') ? `${baseUrl}${src.slice(1)}` : src;
+
   return (
     <img
-      src={src}
+      src={normalizedSrc}
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
