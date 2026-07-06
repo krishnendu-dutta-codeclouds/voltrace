@@ -1,0 +1,326 @@
+[
+  {
+    "id": "pulse-runner",
+    "name": "Pulse Runner",
+    "line": "Running",
+    "price": 129,
+    "tagline": "Daily road runner with dual-density foam.",
+    "description": "A daily road running shoe engineered for the long, easy miles and the tempo efforts in between. Dual-density foam delivers a smooth, balanced ride.",
+    "specs": {
+      "weight": "225g",
+      "drop": "8mm",
+      "cushioning": "Dual-density foam",
+      "upperMaterial": "Engineered mesh"
+    },
+    "images": [
+      { "colorway": "Volt Green/Black", "primary": "#8FD400", "secondary": "#0A0A0A", "src": "/images/products/pulse-runner-volt.png" },
+      { "colorway": "Arctic Blue/White", "primary": "#7FB8E0", "secondary": "#FFFFFF", "src": "/images/products/pulse-runner-arctic.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": true }
+    ],
+    "width": ["Standard", "Wide"],
+    "colorways": [
+      { "name": "Volt Green/Black", "swatch": "#8FD400" },
+      { "name": "Arctic Blue/White", "swatch": "#7FB8E0" }
+    ],
+    "rating": 4.6,
+    "reviewCount": 312,
+    "reviews": [
+      { "author": "J. Rivera", "rating": 5, "text": "Bought these for marathon training and they hold up beautifully past 500 miles." },
+      { "author": "M. Chen", "rating": 4, "text": "Comfortable out of the box. Took a couple of runs to break in the heel." },
+      { "author": "A. Patel", "rating": 5, "text": "Wide toe box is real — no squeeze at the forefoot." }
+    ],
+    "relatedIds": ["pulse-runner-pro", "forgefit-trainer", "cruiser-street"]
+  },
+  {
+    "id": "pulse-runner-pro",
+    "name": "Pulse Runner Pro",
+    "line": "Running",
+    "price": 179,
+    "tagline": "Race day, carbon-plated propulsion.",
+    "description": "Built for race day. A full-length carbon plate, lightweight PEBA midsole, and aggressive forefoot rocker deliver a propulsive ride when it matters.",
+    "specs": {
+      "weight": "198g",
+      "drop": "6mm",
+      "cushioning": "PEBA superfoam",
+      "upperMaterial": "Single-layer engineered mesh"
+    },
+    "images": [
+      { "colorway": "Solar Orange/Black", "primary": "#FF7A1A", "secondary": "#0A0A0A", "src": "/images/products/pulse-runner-pro-solar.png" },
+      { "colorway": "Stealth Black", "primary": "#1A1A1A", "secondary": "#3A3A3A", "src": "/images/products/pulse-runner-pro-stealth.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": false },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": false }
+    ],
+    "width": ["Standard", "Wide"],
+    "colorways": [
+      { "name": "Solar Orange/Black", "swatch": "#FF7A1A" },
+      { "name": "Stealth Black", "swatch": "#1A1A1A" }
+    ],
+    "rating": 4.8,
+    "reviewCount": 187,
+    "reviews": [
+      { "author": "K. Tanaka", "rating": 5, "text": "Shaved 2 minutes off my half. The rocker geometry is no joke." },
+      { "author": "D. Okafor", "rating": 5, "text": "Stiff where it should be, soft where it should be." },
+      { "author": "S. Park", "rating": 4, "text": "Tight in the toebox at first — broke in after 30km." }
+    ],
+    "relatedIds": ["pulse-runner", "trailblaze-lite", "forgefit-trainer"]
+  },
+  {
+    "id": "forgefit-trainer",
+    "name": "ForgeFit Trainer",
+    "line": "Training",
+    "price": 99,
+    "tagline": "Gym, HIIT, and lateral-movement ready.",
+    "description": "A flat, stable training shoe built for the gym floor. Wide forefoot platform, rope-guard sidewall, and a grippy rubber outsole that holds on lateral cuts.",
+    "specs": {
+      "weight": "285g",
+      "drop": "4mm",
+      "cushioning": "EVA midsole",
+      "upperMaterial": "TPU-reinforced mesh"
+    },
+    "images": [
+      { "colorway": "Graphite/Lime", "primary": "#3A3F47", "secondary": "#CFFF04", "src": "/images/products/forgefit-trainer-graphite.png" },
+      { "colorway": "Black/Black", "primary": "#0A0A0A", "secondary": "#1A1A1A", "src": "/images/products/forgefit-trainer-black.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": false },
+      { "size": 13, "inStock": true }
+    ],
+    "width": [],
+    "colorways": [
+      { "name": "Graphite/Lime", "swatch": "#3A3F47" },
+      { "name": "Black/Black", "swatch": "#0A0A0A" }
+    ],
+    "rating": 4.5,
+    "reviewCount": 421,
+    "reviews": [
+      { "author": "R. Hassan", "rating": 5, "text": "Best cross-trainer I've owned. Stays planted on cleans." },
+      { "author": "B. Müller", "rating": 4, "text": "Solid shoe. Wish it had a touch more cushion for box jumps." }
+    ],
+    "relatedIds": ["forgefit-trainer-mid", "pulse-runner", "cruiser-street"]
+  },
+  {
+    "id": "forgefit-trainer-mid",
+    "name": "ForgeFit Trainer Mid",
+    "line": "Training",
+    "price": 119,
+    "tagline": "Mid-cut support for lifting and cross-training.",
+    "description": "All the stability of the ForgeFit Trainer, with a mid-cut collar for ankle support during heavy lifts and sled work.",
+    "specs": {
+      "weight": "315g",
+      "drop": "4mm",
+      "cushioning": "EVA midsole",
+      "upperMaterial": "TPU-reinforced mesh + mid collar"
+    },
+    "images": [
+      { "colorway": "Charcoal/Red", "primary": "#2C2C2C", "secondary": "#C81E1E", "src": "/images/products/forgefit-trainer-mid-charcoal.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": true }
+    ],
+    "width": [],
+    "colorways": [
+      { "name": "Charcoal/Red", "swatch": "#2C2C2C" }
+    ],
+    "rating": 4.4,
+    "reviewCount": 96,
+    "reviews": [
+      { "author": "L. O'Brien", "rating": 5, "text": "The mid-cut is the real deal. Squats feel locked in." }
+    ],
+    "relatedIds": ["forgefit-trainer", "pulse-runner", "trailblaze-gtx"]
+  },
+  {
+    "id": "trailblaze-gtx",
+    "name": "TrailBlaze GTX",
+    "line": "Trail",
+    "price": 159,
+    "tagline": "Waterproof trail grip for technical terrain.",
+    "description": "Built for wet, technical trails. A GORE-TEX waterproof membrane, aggressive 4mm lugs, and a rock plate keep you moving when the conditions get serious.",
+    "specs": {
+      "weight": "320g",
+      "drop": "6mm",
+      "cushioning": "Compression-molded EVA",
+      "upperMaterial": "GORE-TEX ripstop mesh"
+    },
+    "images": [
+      { "colorway": "Moss/Brown", "primary": "#5A6B3A", "secondary": "#6B4423", "src": "/images/products/trailblaze-gtx-moss.png" },
+      { "colorway": "Slate/Orange", "primary": "#4A5560", "secondary": "#FF6A1A", "src": "/images/products/trailblaze-gtx-slate.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": false },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": true }
+    ],
+    "width": ["Standard", "Wide"],
+    "colorways": [
+      { "name": "Moss/Brown", "swatch": "#5A6B3A" },
+      { "name": "Slate/Orange", "swatch": "#4A5560" }
+    ],
+    "rating": 4.7,
+    "reviewCount": 248,
+    "reviews": [
+      { "author": "T. Nguyen", "rating": 5, "text": "Did 30 miles in the Sierras. Feet stayed dry the entire time." },
+      { "author": "P. Williams", "rating": 4, "text": "Lugs bite into mud like nothing else I've worn." }
+    ],
+    "relatedIds": ["trailblaze-lite", "pulse-runner", "forgefit-trainer-mid"]
+  },
+  {
+    "id": "trailblaze-lite",
+    "name": "TrailBlaze Lite",
+    "line": "Trail",
+    "price": 119,
+    "tagline": "Dry-trail day hikes, lighter and quicker.",
+    "description": "A lightweight, breathable trail shoe for dry-trail day hikes and fastpacking. No waterproof membrane — just airflow and grip.",
+    "specs": {
+      "weight": "265g",
+      "drop": "6mm",
+      "cushioning": "Compression-molded EVA",
+      "upperMaterial": "Quick-dry ripstop mesh"
+    },
+    "images": [
+      { "colorway": "Sand/Green", "primary": "#D4C29A", "secondary": "#5A6B3A", "src": "/images/products/trailblaze-lite-sand.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": true }
+    ],
+    "width": ["Standard", "Wide"],
+    "colorways": [
+      { "name": "Sand/Green", "swatch": "#D4C29A" }
+    ],
+    "rating": 4.5,
+    "reviewCount": 154,
+    "reviews": [
+      { "author": "E. Cole", "rating": 5, "text": "Breathes well on hot desert days. Grippy on slickrock." }
+    ],
+    "relatedIds": ["trailblaze-gtx", "pulse-runner-pro", "cruiser-street"]
+  },
+  {
+    "id": "cruiser-street",
+    "name": "Cruiser Street",
+    "line": "Lifestyle",
+    "price": 89,
+    "tagline": "Everyday wear that doesn't look like gym gear.",
+    "description": "An everyday sneaker that borrows running-shoe comfort without looking like one. Premium suede upper, recycled foam midsole, and a gum rubber outsole.",
+    "specs": {
+      "weight": "295g",
+      "drop": "8mm",
+      "cushioning": "Recycled EVA",
+      "upperMaterial": "Premium suede"
+    },
+    "images": [
+      { "colorway": "White/Grey", "primary": "#F2F2F2", "secondary": "#9AA0A6", "src": "/images/products/cruiser-street-white.png" },
+      { "colorway": "Black/Gum", "primary": "#0A0A0A", "secondary": "#B07A4A", "src": "/images/products/cruiser-street-black.png" }
+    ],
+    "sizes": [
+      { "size": 6, "inStock": true },
+      { "size": 6.5, "inStock": true },
+      { "size": 7, "inStock": true },
+      { "size": 7.5, "inStock": true },
+      { "size": 8, "inStock": true },
+      { "size": 8.5, "inStock": true },
+      { "size": 9, "inStock": true },
+      { "size": 9.5, "inStock": true },
+      { "size": 10, "inStock": true },
+      { "size": 10.5, "inStock": true },
+      { "size": 11, "inStock": true },
+      { "size": 11.5, "inStock": true },
+      { "size": 12, "inStock": true },
+      { "size": 12.5, "inStock": true },
+      { "size": 13, "inStock": true }
+    ],
+    "width": [],
+    "colorways": [
+      { "name": "White/Grey", "swatch": "#F2F2F2" },
+      { "name": "Black/Gum", "swatch": "#0A0A0A" }
+    ],
+    "rating": 4.3,
+    "reviewCount": 89,
+    "reviews": [
+      { "author": "N. Garcia", "rating": 5, "text": "Comfortable all day. Looks clean with jeans or shorts." }
+    ],
+    "relatedIds": ["pulse-runner", "forgefit-trainer", "trailblaze-lite"]
+  }
+]

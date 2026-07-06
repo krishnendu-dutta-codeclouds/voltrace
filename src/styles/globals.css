@@ -1,0 +1,158 @@
+/* =============================================================
+   Voltrace — Base Resets & Animation Primitives
+   All design tokens are now in src/styles/tailwind.css @theme.
+   This file keeps only: resets, animation utilities, Lenis,
+   and CSS custom props that JS/hooks reference at runtime.
+   ============================================================= */
+
+:root {
+  /* Kept for JS/animation hooks that reference these at runtime */
+  --color-ink: #0B0B0F;
+  --color-ink-2: #1A1A22;
+  --color-ink-3: #2A2A35;
+  --color-ink-muted: #6B6F7A;
+  --color-accent: #D6FF3A;
+  --color-accent-glow: rgba(214, 255, 58, 0.35);
+  --color-surface: #FAFAF7;
+  --color-surface-pure: #FFFFFF;
+  --color-surface-dark: #0B0B0F;
+  --color-surface-alt: #F1F0EA;
+  --color-border: #E6E4DC;
+  --color-on-dark-muted: #9B9DA6;
+
+  --font-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 150ms;
+  --t-med: 220ms;
+  --t-slow: 320ms;
+  --t-reveal: 600ms;
+
+  --container-max: 1440px;
+  --container-pad: 24px;
+  --nav-h: 72px;
+  --focus-ring: 0 0 0 3px var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  :root { --container-pad: 16px; --nav-h: 64px; }
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+img, svg { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a { color: inherit; text-decoration: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+input, button, textarea, select { font: inherit; color: inherit; }
+hr { border: 0; border-top: 1px solid var(--color-border); margin: 0; }
+
+/* ---- Selection ---- */
+::selection { background: var(--color-accent); color: var(--color-ink); }
+
+/* ---- Focus visible ---- */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Scrollbar polish ---- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 10px; border: 2px solid var(--color-surface); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-ink-muted); }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Animation primitives used by framer-primitives hooks ---- */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: inherit;
+  padding-bottom: 0.08em;
+}
+.word {
+  display: inline-block;
+  will-change: transform;
+  line-height: inherit;
+}
+.split-target { display: inline-block; line-height: inherit; }
+.reveal-target { will-change: transform, opacity; }
+
+/* ---- Scroll progress bar (used by useScrollProgress hook) ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* ---- Custom cursor ---- */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 14px; height: 14px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 240ms var(--ease-out), height 240ms var(--ease-out), background-color 200ms;
+  will-change: transform;
+}
+.cursor--hover { width: 56px; height: 56px; }
+.cursor--text { width: 4px; height: 28px; border-radius: 2px; }
+@media (max-width: 960px) { .cursor { display: none; } }
+
+/* ---- Magnetic wrapper ---- */
+.magnetic { display: inline-block; will-change: transform; }
+
+/* ---- Lenis smooth scroll ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---- Page transition wrapper ---- */
+.page { min-height: 100%; }
+
+/* ---- Hero line — used by Split component ---- */
+.hero__line { display: block; overflow: hidden; }
+
+/* ---- Keyframes (animation hooks reference these) ---- */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
