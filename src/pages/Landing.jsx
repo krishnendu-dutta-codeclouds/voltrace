@@ -150,7 +150,7 @@ function Hero({ heroProduct }) {
   return (
     <section
       ref={heroRef}
-      className="relative bg-[#060606] text-surface overflow-hidden pt-[64px]"
+      className="relative bg-[#060606] text-surface overflow-hidden py-[20px]"
       aria-label="Hero — New Season"
     >
       {/* Ambient volt glow behind center */}
@@ -761,7 +761,7 @@ export default function Landing() {
   const featured = products.filter((p) => p.line !== 'Lifestyle').slice(0, 4);
 
   return (
-    <PageEnter as="main" className="pt-[72px]">
+    <PageEnter as="main" className="pt-[65px]">
       <Hero heroProduct={heroProduct} />
       <MarqueeStrip />
       <FeaturedCollection featured={featured} loading={loading} />

@@ -47,7 +47,7 @@ export default function TrustBar({ variant = 'light' }) {
 
   return (
     <aside className={`w-full overflow-hidden ${wrapperClass}`} aria-label="Trust signals">
-      <ul className="mx-auto max-w-[1440px] px-6 py-4 flex flex-wrap justify-center items-center gap-4 gap-x-10">
+      <ul className="mx-auto px-6 py-8 flex flex-wrap justify-center items-center gap-4 gap-x-10 d-block w-full">
         {ITEMS.slice(0, 4).map((it) => (
           <li key={it.label} className="inline-flex items-center gap-2 text-[12px] font-medium whitespace-nowrap">
             {DOT}

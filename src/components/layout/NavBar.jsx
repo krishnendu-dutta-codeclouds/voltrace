@@ -493,11 +493,9 @@ export default function NavBar({ minimal = false }) {
           aria-label="Voltrace — Home"
           onClick={() => setActiveMenu(null)}
         >
-          <span aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="22" height="22">
-              <path d="M3 24 L11 8 L17 20 L25 8" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="square" strokeLinejoin="miter" />
-            </svg>
-          </span>
+          
+          <img className="w-8 h-auto" src="public/favicon.svg" alt="" />
+      
           <span>VOLTRACE</span>
         </Link>
 
