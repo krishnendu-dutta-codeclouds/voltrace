@@ -3,6 +3,7 @@ import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import productsJson from '../../data/products.json';
+import favicon from '/favicon.svg';
 
 /* ── Mega-menu data ────────────────────────────────────────────── */
 const MEGA_MENU = [
@@ -474,6 +475,25 @@ export default function NavBar({ minimal = false }) {
     setMobileSub(null);
   }, [location.pathname, location.search]);
 
+  useEffect(() => {
+    if (!mobileOpen) return undefined;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        setMobileSub(null);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileOpen]);
+
   const activeItem = MEGA_MENU.find((m) => m.id === activeMenu);
 
   return (
@@ -484,7 +504,7 @@ export default function NavBar({ minimal = false }) {
         role="banner"
       >
       {/* ── Top bar ─────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[1440px] px-6 h-[64px] flex items-center gap-6">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 h-[64px] flex items-center gap-3 sm:gap-6">
 
         {/* Logo */}
         <Link
@@ -494,7 +514,7 @@ export default function NavBar({ minimal = false }) {
           onClick={() => setActiveMenu(null)}
         >
           
-          <img className="w-8 h-auto" src="public/favicon.svg" alt="" />
+          <img className="w-8 h-auto" src={favicon} alt="" />
       
           <span>VOLTRACE</span>
         </Link>
@@ -563,7 +583,7 @@ export default function NavBar({ minimal = false }) {
         )}
 
         {/* ── Right: search + icons ────────────────────────────── */}
-        <div className="flex items-center gap-2 ml-auto">
+        <div className="flex items-center gap-1 sm:gap-2 ml-auto">
           {!showMinimal && (
             <>
               {/* Search toggle (popup style) */}
@@ -597,7 +617,7 @@ export default function NavBar({ minimal = false }) {
               {/* Cart */}
               <Link
                 to="/cart"
-                className="relative flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-accent text-[13px] font-bold tracking-[0.04em] hover:bg-accent hover:text-ink transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="relative flex items-center gap-2 h-10 px-3 sm:px-4 rounded-full bg-ink text-accent text-[13px] font-bold tracking-[0.04em] hover:bg-accent hover:text-ink transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
               >
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -616,7 +636,7 @@ export default function NavBar({ minimal = false }) {
               <button
                 type="button"
                 onClick={() => setMobileOpen((v) => !v)}
-                className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-ink-muted hover:text-ink hover:bg-surface-alt transition-all duration-150"
+                className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-ink-muted hover:text-ink hover:bg-surface-alt transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileOpen}
               >
@@ -660,7 +680,7 @@ export default function NavBar({ minimal = false }) {
           {/* Sidebar panel */}
           <div
             className={[
-              'fixed top-0 left-0 bottom-0 z-[70] w-[300px] bg-[#0A0A0A] flex flex-col transition-transform duration-300 ease-out lg:hidden',
+              'fixed inset-y-0 left-0 z-[70] h-dvh max-h-dvh w-[min(100vw,420px)] overflow-hidden bg-[#0A0A0A] flex flex-col transition-transform duration-300 ease-out lg:hidden',
               mobileOpen ? 'translate-x-0' : '-translate-x-full',
             ].join(' ')}
             role="dialog"
@@ -671,7 +691,7 @@ export default function NavBar({ minimal = false }) {
             <div className="flex items-center justify-between px-5 h-16 border-b border-white/10 flex-shrink-0">
               <Link
                 to="/"
-                className="flex items-center gap-2 font-display font-black text-[14px] tracking-[0.08em] text-surface"
+                className="flex items-center gap-2 font-display font-black text-[14px] tracking-[0.08em] text-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 onClick={() => { setMobileOpen(false); setMobileSub(null); }}
               >
                 <svg viewBox="0 0 32 32" width="20" height="20">
@@ -682,7 +702,7 @@ export default function NavBar({ minimal = false }) {
               <button
                 type="button"
                 onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                className="w-9 h-9 rounded-full bg-white/8 flex items-center justify-center text-surface/60 hover:text-surface hover:bg-white/15 transition-all duration-150"
+                className="w-9 h-9 rounded-full bg-white/8 flex items-center justify-center text-surface/60 hover:text-surface hover:bg-white/15 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label="Close menu"
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" aria-hidden="true">
@@ -696,7 +716,7 @@ export default function NavBar({ minimal = false }) {
               <button
                 type="button"
                 onClick={() => { setSearchOpen(true); setMobileOpen(false); setMobileSub(null); }}
-                className="w-full h-9 pl-9 pr-3 rounded-full border border-white/12 bg-white/6 text-[13px] text-surface/40 hover:text-surface/70 transition-all duration-150 relative text-left"
+                className="w-full h-11 pl-10 pr-3 rounded-full border border-white/12 bg-white/6 text-[13px] text-surface/40 hover:text-surface/70 transition-all duration-150 relative text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Search shoes…
                 <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-surface/30" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
@@ -705,124 +725,119 @@ export default function NavBar({ minimal = false }) {
               </button>
             </div>
 
-            {/* Two-panel body */}
-            <div className="flex flex-1 overflow-hidden">
+            {/* Mobile menu body */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
+              {mobileSub ? (() => {
+                const item = MEGA_MENU.find((m) => m.id === mobileSub);
+                if (!item) return null;
+                return (
+                  <div className="p-4 pb-8 sm:p-5 sm:pb-8">
+                    <button
+                      type="button"
+                      onClick={() => setMobileSub(null)}
+                      className="mb-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 px-4 text-[12px] font-bold uppercase tracking-[0.08em] text-surface/65 transition-all duration-150 hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6"/>
+                      </svg>
+                      Browse
+                    </button>
 
-              {/* Left: category list */}
-              <nav className="w-[120px] flex-shrink-0 border-r border-white/8 overflow-y-auto flex flex-col" aria-label="Categories">
-                {MEGA_MENU.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setMobileSub(item.id === mobileSub ? null : item.id)}
-                    className={[
-                      'flex flex-col items-start px-4 py-4 text-left border-b border-white/6 transition-all duration-150',
-                      mobileSub === item.id
-                        ? 'bg-accent/12 border-l-2 border-l-accent text-accent'
-                        : 'text-surface/60 hover:bg-white/5 hover:text-surface border-l-2 border-l-transparent',
-                    ].join(' ')}
-                  >
-                    <span className="text-[12px] font-bold leading-tight">{item.label}</span>
-                  </button>
-                ))}
-
-                <div className="mt-auto border-t border-white/8">
-                  <Link
-                    to="/shop?sort=newest"
-                    onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                    className="flex flex-col items-start px-4 py-4 border-b border-white/6 text-accent"
-                  >
-                    <span className="text-[10px] font-black uppercase tracking-[0.1em] bg-accent text-ink px-1.5 py-0.5 rounded-sm">NEW</span>
-                    <span className="text-[11px] font-semibold mt-1 text-surface/60">Arrivals</span>
-                  </Link>
-                  <Link
-                    to="/shop?maxPrice=100"
-                    onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                    className="flex flex-col items-start px-4 py-4"
-                  >
-                    <span className="text-[10px] font-black uppercase tracking-[0.1em] bg-[#ef4444] text-white px-1.5 py-0.5 rounded-sm">SALE</span>
-                    <span className="text-[11px] font-semibold mt-1 text-[#ef4444]/80">Deals</span>
-                  </Link>
-                </div>
-              </nav>
-
-              {/* Right: sub-links panel */}
-              <div className="flex-1 overflow-y-auto">
-                {mobileSub ? (() => {
-                  const item = MEGA_MENU.find((m) => m.id === mobileSub);
-                  if (!item) return null;
-                  return (
-                    <div className="flex flex-col">
-                      {/* Featured card */}
-                      <div className="m-4 rounded-[16px] bg-white/6 border border-white/10 p-4 flex flex-col gap-2">
-                        <span className="text-[10px] font-semibold text-accent">{item.featured.label}</span>
-                        <p className="text-[14px] font-bold text-surface">{item.featured.title}</p>
-                        <p className="text-[11px] text-surface/40">{item.featured.sub}</p>
-                        <div className="flex items-center justify-between mt-1">
-                          <span className="text-[16px] font-black text-accent">{item.featured.badge}</span>
-                          <Link
-                            to={item.featured.to}
-                            onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                            className="inline-flex h-7 items-center px-3 rounded-full bg-accent text-ink text-[10px] font-bold uppercase"
-                          >
-                            View
-                          </Link>
-                        </div>
+                    <div className="rounded-[18px] border border-white/10 bg-white/5 p-4">
+                      <span className="text-[10px] font-semibold text-accent">{item.featured.label}</span>
+                      <p className="mt-2 text-[18px] font-display font-black leading-tight text-surface">{item.featured.title}</p>
+                      <p className="mt-1 text-[12px] text-surface/45">{item.featured.sub}</p>
+                      <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/8 pt-4">
+                        <span className="text-[20px] font-black text-accent">{item.featured.badge}</span>
+                        <Link
+                          to={item.featured.to}
+                          onClick={() => { setMobileOpen(false); setMobileSub(null); }}
+                          className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-[11px] font-black uppercase tracking-[0.08em] text-ink transition-colors duration-150 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        >
+                          View
+                        </Link>
                       </div>
+                    </div>
 
-                      {/* All columns */}
+                    <nav className="mt-6 flex flex-col gap-5" aria-label={`${item.label} links`}>
                       {item.columns.map((col) => (
-                        <div key={col.heading} className="px-4 pb-4">
-                          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-surface/30 mb-2 pt-2 border-t border-white/6">
+                        <div key={col.heading}>
+                          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-surface/35">
                             {col.heading}
                           </p>
-                          {col.links.map((link) => (
-                            <Link
-                              key={link.label}
-                              to={link.to}
-                              onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                              className="flex items-center justify-between py-2.5 border-b border-white/5 last:border-none group"
-                            >
-                              <span className="flex flex-col">
-                                <span className="text-[13px] font-semibold text-surface/80 group-hover:text-accent transition-colors">{link.label}</span>
-                                {link.sub && <span className="text-[10px] text-surface/35">{link.sub}</span>}
-                              </span>
-                              <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" className="text-surface/25 group-hover:text-accent transition-colors flex-shrink-0">
-                                <polyline points="9 18 15 12 9 6"/>
-                              </svg>
-                            </Link>
-                          ))}
+                          <div className="overflow-hidden rounded-[16px] border border-white/8 bg-white/[0.03]">
+                            {col.links.map((link) => (
+                              <Link
+                                key={link.label}
+                                to={link.to}
+                                onClick={() => { setMobileOpen(false); setMobileSub(null); }}
+                                className="group flex min-h-[56px] items-center justify-between gap-3 border-b border-white/6 px-4 py-3 last:border-b-0 transition-colors duration-150 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                              >
+                                <span className="flex min-w-0 flex-col">
+                                  <span className="text-[15px] font-bold text-surface/85 transition-colors group-hover:text-accent">{link.label}</span>
+                                  {link.sub && <span className="mt-0.5 text-[11px] text-surface/38">{link.sub}</span>}
+                                </span>
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" className="flex-shrink-0 text-surface/28 transition-colors group-hover:text-accent" aria-hidden="true">
+                                  <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       ))}
-                    </div>
-                  );
-                })() : (
-                  <div className="flex flex-col gap-0 p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-surface/25 mb-4">Browse</p>
-                    {MEGA_MENU.map((item) => (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => setMobileSub(item.id)}
-                        className="flex items-center justify-between py-3.5 border-b border-white/6 last:border-none group"
-                      >
-                        <span className="text-[14px] font-semibold text-surface/70 group-hover:text-surface transition-colors">{item.label}</span>
-                        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" className="text-surface/25 group-hover:text-accent transition-colors">
-                          <polyline points="9 18 15 12 9 6"/>
-                        </svg>
-                      </button>
-                    ))}
+                    </nav>
                   </div>
-                )}
-              </div>
+                );
+              })() : (
+                <nav className="flex flex-col gap-3 p-4 pb-8 sm:p-5 sm:pb-8" aria-label="Mobile primary">
+                  <p className="mb-1 text-[10px] font-black uppercase tracking-[0.18em] text-surface/35">Browse</p>
+                  {MEGA_MENU.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setMobileSub(item.id)}
+                      className="group flex min-h-[64px] items-center justify-between rounded-[18px] border border-white/8 bg-white/[0.03] px-4 text-left transition-all duration-150 hover:border-accent/30 hover:bg-accent/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <span className="flex flex-col">
+                        <span className="text-[18px] font-display font-black leading-tight text-surface transition-colors group-hover:text-accent">{item.label}</span>
+                        <span className="mt-1 text-[11px] font-medium text-surface/35">
+                          {item.columns.map((col) => col.heading).join(' / ')}
+                        </span>
+                      </span>
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" className="text-surface/30 transition-colors group-hover:text-accent" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                  ))}
+
+                  <div className="mt-2 grid grid-cols-2 gap-3">
+                    <Link
+                      to="/shop?sort=newest"
+                      onClick={() => { setMobileOpen(false); setMobileSub(null); }}
+                      className="flex min-h-[72px] flex-col justify-between rounded-[18px] border border-accent/30 bg-accent px-4 py-3 text-ink transition-colors duration-150 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <span className="text-[10px] font-black uppercase tracking-[0.12em]">New</span>
+                      <span className="text-[14px] font-black">Arrivals</span>
+                    </Link>
+                    <Link
+                      to="/shop?maxPrice=100"
+                      onClick={() => { setMobileOpen(false); setMobileSub(null); }}
+                      className="flex min-h-[72px] flex-col justify-between rounded-[18px] border border-[#ef4444]/35 bg-[#ef4444]/12 px-4 py-3 text-[#ff5a5a] transition-colors duration-150 hover:bg-[#ef4444]/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ef4444]"
+                    >
+                      <span className="text-[10px] font-black uppercase tracking-[0.12em]">Sale</span>
+                      <span className="text-[14px] font-black">Deals</span>
+                    </Link>
+                  </div>
+                </nav>
+              )}
             </div>
 
             {/* Sidebar footer */}
-            <div className="px-5 py-4 border-t border-white/8 flex items-center gap-4 flex-shrink-0">
+            <div className="px-4 sm:px-5 py-4 pb-[max(16px,env(safe-area-inset-bottom))] border-t border-white/8 flex items-center gap-3 sm:gap-4 flex-shrink-0">
               <Link
                 to="/wishlist"
                 onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                className="flex items-center gap-2 text-[12px] font-semibold text-surface/50 hover:text-surface transition-colors"
+                className="flex min-h-11 items-center gap-2 text-[12px] font-semibold text-surface/50 hover:text-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
               >
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -832,7 +847,7 @@ export default function NavBar({ minimal = false }) {
               <Link
                 to="/cart"
                 onClick={() => { setMobileOpen(false); setMobileSub(null); }}
-                className="ml-auto flex items-center gap-2 h-9 px-4 rounded-full bg-accent text-ink text-[12px] font-bold"
+                className="ml-auto flex min-h-11 items-center gap-2 px-4 rounded-full bg-accent text-ink text-[12px] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/>

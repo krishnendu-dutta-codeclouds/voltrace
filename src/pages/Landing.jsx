@@ -421,10 +421,10 @@ function FeaturedCollection({ featured, loading }) {
   useReveal(gridRef, { selector: '.card, article', y: 60, duration: 0.9, stagger: 0.08, start: '0px 0px -10% 0px' });
 
   return (
-    <section className="py-24 bg-surface">
-      <div className="mx-auto max-w-[1440px] px-6">
-        <header className="flex items-end justify-between gap-6 mb-12" ref={headRef}>
-          <div>
+    <section className="py-16 md:py-24 bg-surface">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <header className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12" ref={headRef}>
+          <div className="min-w-0">
             <span className="block text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-3">Featured · 4 of 7</span>
             <h2 className="text-[clamp(32px,5vw,64px)] font-display font-black leading-tight tracking-tight text-ink mt-2">
               The <em>essentials</em>.
@@ -434,14 +434,14 @@ function FeaturedCollection({ featured, loading }) {
             </p>
           </div>
           <Magnetic>
-            <LinkButton to="/shop" variant="secondary" data-cursor="hover">See the full collection →</LinkButton>
+            <LinkButton to="/shop" variant="secondary" className="w-full sm:w-auto" data-cursor="hover">See the full collection →</LinkButton>
           </Magnetic>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" ref={gridRef}>
+        <div className="grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" ref={gridRef}>
           {loading
             ? Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex flex-col rounded-[20px] overflow-hidden bg-surface-alt">
+                <div key={i} className="min-w-0 flex flex-col rounded-[20px] overflow-hidden bg-surface-alt">
                   <div className="skeleton-shimmer aspect-[4/3]" />
                   <div className="p-4 flex flex-col gap-2">
                     <div className="skeleton-shimmer h-4 w-3/4 rounded-full" />
@@ -449,7 +449,11 @@ function FeaturedCollection({ featured, loading }) {
                   </div>
                 </div>
               ))
-            : featured.map((p) => <ProductCard key={p.id} product={p} />)
+            : featured.map((p) => (
+                <div key={p.id} className="min-w-0">
+                  <ProductCard product={p} />
+                </div>
+              ))
           }
         </div>
       </div>
