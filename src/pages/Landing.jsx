@@ -88,19 +88,19 @@ function TypingHeadline() {
 
   return (
     <h1 className="hero__headline font-display font-black leading-[0.88] tracking-[-0.04em] text-surface flex flex-col">
-      <span className="block text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5">
+      <span className=" text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5">
         {displayedLines[0]}
         {((!isDeleting && lineIdx === 0) || (isDeleting && lineIdx === 0 && displayedLines[0].length > 0)) && (
           <span className="w-1.5 h-[0.7em] bg-accent inline-block animate-pulse shadow-[0_0_8px_#CFFF04]" />
         )}
       </span>
-      <span className="block text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5">
+      <span className=" text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5">
         {displayedLines[1]}
         {((!isDeleting && lineIdx === 1) || (isDeleting && lineIdx === 1 && displayedLines[1].length > 0)) && (
           <span className="w-1.5 h-[0.7em] bg-accent inline-block animate-pulse shadow-[0_0_8px_#CFFF04]" />
         )}
       </span>
-      <span className="block text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5 text-accent">
+      <span className=" text-[clamp(36px,4.5vw,72px)] min-h-[1.1em] flex items-center gap-1.5 text-accent">
         {displayedLines[2]}
         {((!isDeleting && lineIdx === 2) || (isDeleting && lineIdx === 2 && displayedLines[2].length > 0)) && (
           <span className="w-1.5 h-[0.7em] bg-accent inline-block animate-pulse shadow-[0_0_8px_#CFFF04]" />

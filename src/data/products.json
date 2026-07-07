@@ -61,7 +61,7 @@
       "upperMaterial": "Single-layer engineered mesh"
     },
     "images": [
-      { "colorway": "Solar Orange/Black", "primary": "#FF7A1A", "secondary": "#0A0A0A", "src": "/images/products/pulse-runner-pro-solar.png" },
+      { "colorway": "Solar Orange/Black", "primary": "#eac84f", "secondary": "#0A0A0A", "src": "/images/products/pulse-runner-pro-solar.png" },
       { "colorway": "Stealth Black", "primary": "#1A1A1A", "secondary": "#3A3A3A", "src": "/images/products/pulse-runner-pro-stealth.png" }
     ],
     "sizes": [
