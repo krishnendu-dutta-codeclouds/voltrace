@@ -92,13 +92,18 @@ export function useReveal(ref, opts = {}) {
   // unitless numbers, no empty strings. `toRootMargin` normalizes both
   // legacy shorthand ("top 90%") and CSS margin strings into something
   // the observer can always construct.
+  //
+  // Default '0px 0px -10% 0px': fires when the element's top edge
+  // crosses 10% above the viewport bottom — i.e. the element is ~20%
+  // visible before the animation starts. This makes every section
+  // feel responsive without requiring a full scroll-into-centre.
   const {
     selector = ':scope > *',
     y = 60,
     duration = 1,
     stagger = 0.08,
     delay = 0,
-    start = '0px',
+    start = '0px 0px -10% 0px',
     once = true,
   } = opts;
 

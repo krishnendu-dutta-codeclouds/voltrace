@@ -15,7 +15,7 @@ function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 const BLOCK_NUM = 'w-7 h-7 rounded-full bg-accent text-ink text-[12px] font-black flex items-center justify-center flex-shrink-0';
 
 export default function Checkout() {
-  const { items, clearCart } = useCart();
+  const { items, clearCart, lineKey } = useCart();
   const { placeOrder } = useOrder();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
@@ -31,9 +31,11 @@ export default function Checkout() {
   const headRef = useRef(null);
   const formRef = useRef(null);
   const sideRef = useRef(null);
-  useReveal(headRef, { y: 30, duration: 0.7, start: 'top 90%' });
-  useReveal(formRef, { y: 40, duration: 0.7, stagger: 0.12, start: 'top 88%' });
-  useReveal(sideRef, { y: 40, duration: 0.8, start: 'top 88%' });
+  const btnRef = useRef(null);
+  useReveal(headRef, { y: 30, duration: 0.7, start: '0px' });
+  useReveal(formRef, { selector: 'section', y: 40, duration: 0.7, stagger: 0.12, start: '0px' });
+  useReveal(sideRef, { y: 40, duration: 0.8, start: '0px' });
+  useReveal(btnRef, { y: 20, duration: 0.6, delay: 0.4, start: '0px' });
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
   const markTouched = (k) => () => setTouched((t) => ({ ...t, [k]: true }));
@@ -54,14 +56,25 @@ export default function Checkout() {
     e.preventDefault();
     setTouched({ name: true, email: true, address: true, city: true, zip: true, cardNumber: true, expiry: true, cvc: true });
     if (hasErrors || submitting) return;
+
     setSubmitting(true);
-    setTimeout(() => {
-      const orderNumber = `VLT-${Date.now().toString(36).toUpperCase()}`;
-      placeOrder({ orderNumber, items, totals, placedAt: new Date().toISOString(), contact: { name: form.name, email: form.email, address: form.address, city: form.city, zip: form.zip } });
-      clearCart();
-      setSubmitting(false);
-      navigate('/confirmation');
+    const timer = setTimeout(() => {
+      try {
+        const orderNumber = `VLT-${Date.now().toString(36).toUpperCase()}`;
+        placeOrder({ orderNumber, items, totals, placedAt: new Date().toISOString(), contact: { name: form.name, email: form.email, address: form.address, city: form.city, zip: form.zip } });
+        clearCart();
+        navigate('/confirmation');
+      } catch {
+        // If anything fails (e.g. context error), unlock the button so the
+        // user can try again rather than being stuck on a disabled spinner.
+        setSubmitting(false);
+      }
     }, 800);
+
+    // Cleanup: if the component unmounts (user navigates away via Back)
+    // before the 800 ms timer fires, cancel it to avoid calling setState
+    // on an unmounted component.
+    return () => clearTimeout(timer);
   };
 
   return (
@@ -141,11 +154,13 @@ export default function Checkout() {
               </div>
             </section>
 
-            <Magnetic>
-              <Button type="submit" variant="primary" size="lg" fullWidth loading={submitting} disabled={hasErrors} data-cursor="hover">
-                {submitting ? 'Processing…' : `Place order · ${formatMoney(totals.totalCents)}`}
-              </Button>
-            </Magnetic>
+            <div ref={btnRef}>
+              <Magnetic>
+                <Button type="submit" variant="dark" size="lg" fullWidth loading={submitting} disabled={hasErrors} data-cursor="hover">
+                  {submitting ? 'Processing…' : `Place order · ${formatMoney(totals.totalCents)}`}
+                </Button>
+              </Magnetic>
+            </div>
           </form>
 
           {/* Summary sidebar */}
@@ -156,7 +171,7 @@ export default function Checkout() {
               {/* Items */}
               <div className="flex flex-col gap-3 max-h-[320px] overflow-y-auto pr-1">
                 {items.map((item) => (
-                  <div key={`${item.id}|${item.size}|${item.colorway}`} className="flex items-center gap-3">
+                  <div key={lineKey(item)} className="flex items-center gap-3">
                     <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-surface-alt flex items-center justify-center p-1">
                       <ProductImage src={item.image.src} alt={item.name} primary={item.image.primary} />
                     </div>

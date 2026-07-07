@@ -1,6 +1,8 @@
 // Tiny cart-key helper: same product+size+colorway+width = same line.
 export function lineKey(item) {
-  return [item.id, item.size, item.colorway, item.width ?? '-'].join('|');
+  if (!item) return '';
+  const id = item.productId || item.id;
+  return [id, item.colorway, item.size, item.width || ''].join('|');
 }
 
 export const initialCartState = { items: [] };

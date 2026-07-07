@@ -10,7 +10,8 @@ export default function ShoeSVG({
   size = '100%',
 }) {
   const baseUrl = import.meta.env.BASE_URL || '/';
-  const assetSrc = baseUrl.replace(/\/$/, '') + '/images/banana_shoe.png';
+  const isBlack = primary.toLowerCase() === '#1a1a1a' || primary.toLowerCase() === '#0a0a0a' || primary.toLowerCase() === '#0b0b0f';
+  const assetSrc = baseUrl.replace(/\/$/, '') + (isBlack ? '/images/banana_shoe_black.png' : '/images/banana_shoe.png');
 
   return (
     <img

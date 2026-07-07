@@ -72,7 +72,7 @@ export default function Confirmation() {
               <h2 id="items-h" className="text-[18px] font-bold text-ink mb-6">🛍 Your order</h2>
               <div className="flex flex-col gap-4">
                 {order.items.map((item) => (
-                  <div key={`${item.id}|${item.size}|${item.colorway}`} className="flex items-center gap-4">
+                  <div key={`${item.productId || item.id}|${item.colorway}|${item.size}|${item.width || ''}`} className="flex items-center gap-4">
                     <div className="w-16 h-16 flex-shrink-0 rounded-[12px] bg-surface-alt flex items-center justify-center p-2">
                       <ProductImage src={item.image.src} alt={item.name} primary={item.image.primary} />
                     </div>

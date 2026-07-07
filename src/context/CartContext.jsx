@@ -18,7 +18,16 @@ export function CartProvider({ children }) {
   // Stable action helpers — so consumers can call addItem() without thinking about dispatch shapes.
   const dispatchValue = useMemo(
     () => ({
-      addItem: (item) => dispatch({ type: 'ADD_ITEM', item }),
+      addItem: (item, qty = 1) =>
+        dispatch({
+          type: 'ADD_ITEM',
+          item: {
+            ...item,
+            id: item.productId || item.id,
+            productId: item.productId || item.id,
+            qty: qty ?? item.qty ?? 1,
+          },
+        }),
       updateQty: (key, qty) => dispatch({ type: 'UPDATE_QTY', key, qty }),
       removeItem: (key) => dispatch({ type: 'REMOVE_ITEM', key }),
       clearCart: () => dispatch({ type: 'CLEAR_CART' }),

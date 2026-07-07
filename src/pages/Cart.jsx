@@ -41,7 +41,7 @@ function QtyControl({ label, qty, onDecrease, onIncrease }) {
 }
 
 export default function Cart() {
-  const { items, count, addItem, updateQty, removeItem, clearCart } = useCart();
+  const { items, count, addItem, updateQty, removeItem, clearCart, lineKey } = useCart();
   const [lastRemoved, setLastRemoved] = useState(null);
   const undoTimer = useRef(null);
   const headRef = useRef(null);
@@ -51,12 +51,12 @@ export default function Cart() {
   const remainingCents = totals.freeShippingProgressCents;
   const shipProgress = Math.min(1, totals.subtotalCents / FREE_SHIPPING_THRESHOLD_CENTS);
 
-  useReveal(headRef, { y: 30, duration: 0.7, start: 'top 90%' });
-  useReveal(summaryRef, { y: 24, duration: 0.7, start: 'top 92%' });
+  useReveal(headRef, { y: 30, duration: 0.7, start: '0px' });
+  useReveal(summaryRef, { y: 24, duration: 0.7, start: '0px' });
 
-  const handleRemove = (lineKey, item) => {
-    removeItem(lineKey);
-    setLastRemoved({ lineKey, item, qty: item.qty });
+  const handleRemove = (itemKey, item) => {
+    removeItem(itemKey);
+    setLastRemoved({ itemKey, item, qty: item.qty });
     if (undoTimer.current) clearTimeout(undoTimer.current);
     undoTimer.current = setTimeout(() => setLastRemoved(null), REMOVE_UNDO_MS);
   };
@@ -76,7 +76,7 @@ export default function Cart() {
       <div className="mx-auto max-w-[1440px] px-6 pt-16 pb-8" ref={headRef}>
         <span className="block text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-4">Your bag</span>
         <h1 className="font-display font-black text-[clamp(40px,6vw,88px)] leading-[0.92] tracking-[-0.04em] text-ink">
-          <Split as="span" className="block">{count} {count === 1 ? 'pair' : 'pairs'} in your</Split>
+          <Split key={count} as="span" className="block">{count} {count === 1 ? 'pair' : 'pairs'} in your</Split>
           <Split as="span" className="block italic">{' '}bag</Split>
           <Split as="span" className="block">.</Split>
         </h1>
@@ -126,10 +126,10 @@ export default function Cart() {
             <ul className="flex flex-col gap-0">
               <AnimatePresence initial={false}>
                 {items.map((item) => {
-                  const lineKey = `${item.productId}|${item.colorway}|${item.size}|${item.width || ''}`;
+                  const itemKey = lineKey(item);
                   return (
                     <motion.li
-                      key={lineKey}
+                      key={itemKey}
                       layout
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -163,13 +163,19 @@ export default function Cart() {
                           <QtyControl
                             label={`Update quantity of ${item.name}`}
                             qty={item.qty}
-                            onDecrease={() => updateQty(lineKey, item.qty - 1)}
-                            onIncrease={() => updateQty(lineKey, item.qty + 1)}
+                            onDecrease={() => {
+                              if (item.qty <= 1) {
+                                handleRemove(itemKey, item);
+                              } else {
+                                updateQty(itemKey, item.qty - 1);
+                              }
+                            }}
+                            onIncrease={() => updateQty(itemKey, item.qty + 1)}
                           />
                           <button
                             type="button"
                             className="text-[12px] font-semibold text-ink-muted hover:text-[#C81E1E] transition-colors duration-150"
-                            onClick={() => handleRemove(lineKey, item)}
+                            onClick={() => handleRemove(itemKey, item)}
                           >
                             Remove
                           </button>
@@ -180,24 +186,6 @@ export default function Cart() {
                 })}
               </AnimatePresence>
             </ul>
-
-            {/* Undo toast */}
-            <AnimatePresence>
-              {lastRemoved && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 12 }}
-                  className="flex items-center justify-between gap-4 bg-ink text-surface rounded-[12px] px-4 py-3 text-[13px] font-medium"
-                  role="status"
-                >
-                  <p>Removed <strong>{lastRemoved.item.name}</strong> from your bag.</p>
-                  <Button variant="ghost" onClick={handleUndo} className="text-accent text-[12px] font-bold p-0 min-h-0">
-                    Undo
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Cart actions */}
             <div className="flex items-center justify-between pt-2">
@@ -238,6 +226,26 @@ export default function Cart() {
           </aside>
         </div>
       )}
+
+      {/* Undo toast (outside conditional rendering to persist when cart is empty) */}
+      <AnimatePresence>
+        {lastRemoved && (
+          <div className="mx-auto max-w-[1440px] px-6 mt-6">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              className="flex items-center justify-between gap-4 bg-ink text-surface rounded-[12px] px-4 py-3 text-[13px] font-medium max-w-[600px]"
+              role="status"
+            >
+              <p>Removed <strong>{lastRemoved.item.name}</strong> from your bag.</p>
+              <Button variant="ghost" onClick={handleUndo} className="text-accent text-[12px] font-bold p-0 min-h-0">
+                Undo
+              </Button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </PageEnter>
   );
 }

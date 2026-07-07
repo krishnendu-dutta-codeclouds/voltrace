@@ -42,9 +42,9 @@ export default function Product() {
 
   const [scope, animate] = useAnimate();
 
-  useReveal(heroRef, { y: 30, duration: 0.8, start: 'top 90%' });
-  useReveal(infoRef, { y: 30, duration: 0.6, stagger: 0.07, start: 'top 85%' });
-  useReveal(specsRef, { y: 24, duration: 0.7, start: 'top 85%' });
+  useReveal(heroRef, { y: 30, duration: 0.8, start: '0px' });
+  useReveal(infoRef, { y: 30, duration: 0.6, stagger: 0.07, start: '0px' });
+  useReveal(specsRef, { y: 24, duration: 0.7, start: '0px 0px -10% 0px' });
   useParallax(primaryImgRef, { y: -40, scrub: 0.4 });
   useTilt(galleryRef, { max: 4, perspective: 1000 });
 
@@ -317,18 +317,53 @@ export default function Product() {
             </AnimatePresence>
 
             {/* Benefits */}
-            <ul className="flex flex-col gap-2 border-t border-border pt-4">
+            <div className="border-t border-border pt-5 flex flex-col gap-3">
               {[
-                ['Free shipping', 'on orders over $75'],
-                ['60-day', 'trial, free returns'],
-                ['30-day', 'defect guarantee'],
-              ].map(([strong, rest]) => (
-                <li key={strong} className="flex items-center gap-2 text-[13px] text-ink-muted">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                  <strong className="text-ink">{strong}</strong> {rest}
-                </li>
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3" />
+                      <rect x="9" y="11" width="14" height="10" rx="2" />
+                      <circle cx="12" cy="16" r="1" />
+                    </svg>
+                  ),
+                  strong: 'Free shipping',
+                  rest: 'on orders over $75',
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polyline points="23 4 23 10 17 10" />
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                    </svg>
+                  ),
+                  strong: '60-day trial',
+                  rest: 'free returns, no questions',
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  ),
+                  strong: '30-day guarantee',
+                  rest: 'against manufacturing defects',
+                },
+              ].map(({ icon, strong, rest }) => (
+                <div
+                  key={strong}
+                  className="flex items-center gap-3 rounded-[14px] bg-surface-alt px-4 py-3 transition-all duration-150 hover:bg-accent/10 hover:shadow-sm group"
+                >
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-ink flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-ink transition-colors duration-150">
+                    {icon}
+                  </span>
+                  <span className="text-[13px] text-ink-muted leading-tight">
+                    <strong className="text-ink font-bold">{strong}</strong>{' '}
+                    <span>{rest}</span>
+                  </span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -337,7 +372,7 @@ export default function Product() {
       <div className="mx-auto max-w-[1440px] px-6 py-16" ref={specsRef}>
         <span className="block text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-3">Specifications</span>
         <h2 className="text-[clamp(24px,3vw,40px)] font-display font-black text-ink mb-8">What's inside</h2>
-        <div className="max-w-[560px]">
+        <div className="max-w-[560px] bg-surface-pure border border-border rounded-[24px] p-8 shadow-sm">
           <SpecTable specs={product.specs} />
         </div>
       </div>

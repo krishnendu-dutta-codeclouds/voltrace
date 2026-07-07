@@ -126,7 +126,7 @@ export default function VariantSelector({
                   aria-checked={selected}
                   title={`Width ${w}`}
                 >
-                  <span className="relative z-10">{w}</span>
+                  <span className={`relative z-10 ${selected ? 'pr-6' : ''}`}>{w}</span>
                   {selected && (
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-5 h-5 bg-accent text-ink rounded-full pointer-events-none" aria-hidden="true">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">

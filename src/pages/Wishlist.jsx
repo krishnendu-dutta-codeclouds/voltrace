@@ -11,7 +11,7 @@ export default function Wishlist() {
   const { wishlist, count } = useWishlist();
   const headRef = useRef(null);
 
-  useReveal(headRef, { y: 30, duration: 0.7, start: 'top 90%' });
+  useReveal(headRef, { y: 30, duration: 0.7, start: '0px' });
 
   return (
     <PageEnter as="main" className="pt-[72px] min-h-screen bg-surface">

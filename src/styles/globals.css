@@ -94,7 +94,8 @@ hr { border: 0; border-top: 1px solid var(--color-border); margin: 0; }
   overflow: hidden;
   vertical-align: top;
   line-height: inherit;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
 }
 .word {
   display: inline-block;

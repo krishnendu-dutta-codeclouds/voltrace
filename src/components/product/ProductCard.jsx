@@ -61,7 +61,8 @@ export default function ProductCard({ product }) {
       {/* Media area */}
       <Link
         to={`/product/${product.id}`}
-        className="relative block overflow-hidden bg-[#F1F0EA] aspect-[4/3]"
+        className="relative block overflow-hidden aspect-[4/3]"
+        style={{ backgroundColor: `${currentImage.primary}12`, transition: 'background-color 300ms ease' }}
         aria-label={`${product.name} — view details`}
         data-cursor="hover"
       >
@@ -90,26 +91,15 @@ export default function ProductCard({ product }) {
         </span>
 
         {/* Quick-action overlay */}
-        <div className="absolute bottom-3 left-3 right-3 z-10 flex gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+        <div className="absolute bottom-3 left-3 right-3 z-10 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
           <Link
             to={`/product/${product.id}`}
-            className="flex-1 h-8 flex items-center justify-center rounded-full bg-ink text-accent text-[11px] font-bold uppercase tracking-[0.06em] hover:bg-accent hover:text-ink transition-all duration-150"
+            className="w-full h-10 flex items-center justify-center rounded-full bg-ink text-accent text-[11px] font-bold uppercase tracking-[0.06em] hover:bg-accent hover:text-ink transition-all duration-150 shadow-md"
             data-cursor="hover"
             onClick={(e) => e.stopPropagation()}
           >
             View product
           </Link>
-          <button
-            type="button"
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FAFAF7]/90 backdrop-blur-sm text-[#0B0B0F] hover:bg-[#D6FF3A] transition-all duration-150"
-            aria-label="Save to wishlist"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-            data-cursor="hover"
-          >
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-          </button>
         </div>
       </Link>
 
@@ -153,9 +143,7 @@ export default function ProductCard({ product }) {
         {/* Stock status */}
         <div className="flex items-center justify-between mt-auto pt-1">
           <span className={`text-[11px] font-semibold ${stockColor}`}>{stockLabel}</span>
-          {product.tagline && (
-            <span className="text-[11px] text-[#9A9DA6] font-medium truncate max-w-[120px]">{product.tagline}</span>
-          )}
+          <span className="text-[10px] font-mono uppercase tracking-[0.06em] text-ink-soft">{product.specs.weight} · {product.specs.drop}</span>
         </div>
       </div>
     </motion.article>

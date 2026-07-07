@@ -3,7 +3,7 @@
  */
 export default function CardSkeleton() {
   return (
-    <div className="flex flex-col rounded-[20px] overflow-hidden bg-surface-alt" aria-hidden="true">
+    <div className="flex flex-col rounded-[20px] overflow-hidden bg-white/3 border border-white/6" aria-hidden="true">
       {/* Media area */}
       <div className="skeleton-shimmer aspect-[4/3] w-full" />
       {/* Body */}
